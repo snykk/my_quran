@@ -1,8 +1,8 @@
 // endpoint api: https://api.quran.sutanlab.id/surah
 // get surah data
 
-class Surah {
-  Surah({
+class SurahModel {
+  SurahModel({
     this.number,
     this.sequence,
     this.numberOfVerses,
@@ -18,7 +18,7 @@ class Surah {
   Revelation? revelation;
   Tafsir? tafsir;
 
-  factory Surah.fromJson(Map<String, dynamic> json) => Surah(
+  factory SurahModel.fromJson(Map<String, dynamic> json) => SurahModel(
         number: json["number"],
         sequence: json["sequence"],
         numberOfVerses: json["numberOfVerses"],

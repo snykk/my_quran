@@ -1,8 +1,8 @@
 // endpoint api: https://api.quran.sutanlab.id/surah/:number_surah
 // get detail surah data
 
-class DetailSurah {
-  DetailSurah({
+class DetailSurahModel {
+  DetailSurahModel({
     this.number,
     this.sequence,
     this.numberOfVerses,
@@ -22,7 +22,7 @@ class DetailSurah {
   PreBismillah? preBismillah;
   List<Verse>? verses;
 
-  factory DetailSurah.fromJson(Map<String, dynamic> json) => DetailSurah(
+  factory DetailSurahModel.fromJson(Map<String, dynamic> json) => DetailSurahModel(
         number: json["number"],
         sequence: json["sequence"],
         numberOfVerses: json["numberOfVerses"],
