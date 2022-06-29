@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:my_quran/app/data/models/surah.dart';
+import 'package:my_quran/app/data/models/surah_model.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';

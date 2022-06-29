@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../data/models/surah.dart';
+import '../../../data/models/surah_model.dart';
 
 class HomeController extends GetxController {
   Future<List<SurahModel>> getAllSurah() async {

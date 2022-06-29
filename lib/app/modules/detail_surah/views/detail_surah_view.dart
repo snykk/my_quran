@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:my_quran/app/constants/ratio.dart';
-import 'package:my_quran/app/data/models/surah.dart';
+import 'package:my_quran/app/data/models/surah_model.dart';
 
-import '../../../data/models/detail_surah.dart' as detail_surah;
+import '../../../data/models/detail_surah_model.dart' as detail_surah;
 import '../controllers/detail_surah_controller.dart';
 
 class DetailSurahView extends GetView<DetailSurahController> {
@@ -68,90 +68,88 @@ class DetailSurahView extends GetView<DetailSurahController> {
                   child: Text("Tidak ada data"),
                 );
               }
-              return Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: snapshot.data?.verses?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    // ignore: prefer_is_empty
-                    if (snapshot.data?.verses?.length == 0) {
-                      return Container();
-                    }
-                    detail_surah.Verse? ayat = snapshot.data?.verses?[index];
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: snapshot.data?.verses?.length ?? 0,
+                itemBuilder: (context, index) {
+                  // ignore: prefer_is_empty
+                  if (snapshot.data?.verses?.length == 0) {
+                    return Container();
+                  }
+                  detail_surah.Verse? ayat = snapshot.data?.verses?[index];
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Card(
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 5,
-                              horizontal: 10,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CircleAvatar(
-                                  child: Text("${index + 1}"),
-                                ),
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.bookmark),
-                                    ),
-                                    IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.play_arrow),
-                                    )
-                                  ],
-                                ),
-                              ],
-                            ),
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Card(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: 5,
+                            horizontal: 10,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CircleAvatar(
+                                child: Text("${index + 1}"),
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.bookmark),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {},
+                                    icon: Icon(Icons.play_arrow),
+                                  )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SizedBox(
-                          width: Ratio(context).widthApp,
-                          child: Text(
-                            "${ayat!.text?.arab}",
-                            textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontSize: 25,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "${ayat.text?.transliteration?.en}",
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      SizedBox(
+                        width: Ratio(context).widthApp,
+                        child: Text(
+                          "${ayat!.text?.arab}",
                           textAlign: TextAlign.right,
                           style: TextStyle(
-                            fontSize: 18,
-                            fontStyle: FontStyle.italic,
+                            fontSize: 25,
                           ),
                         ),
-                        SizedBox(
-                          height: 25,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "${ayat.text?.transliteration?.en}",
+                        textAlign: TextAlign.right,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontStyle: FontStyle.italic,
                         ),
-                        Text(
-                          "${ayat.translation!.id}",
-                          textAlign: TextAlign.justify,
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        "${ayat.translation!.id}",
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          fontSize: 18,
                         ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                      ],
-                    );
-                  },
-                ),
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                    ],
+                  );
+                },
               );
             },
           ),
