@@ -7,9 +7,10 @@ import '../../../data/models/surah.dart';
 class HomeController extends GetxController {
   Future<List<SurahModel>> getAllSurah() async {
     Uri url = Uri.parse("https://api.quran.sutanlab.id/surah");
-    var res = await http.get(url);
+    var response = await http.get(url).timeout(Duration(seconds: 30));
+    print(response);
 
-    List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
+    List data = (json.decode(response.body) as Map<String, dynamic>)["data"];
 
     if (data.isEmpty) {
       return [];

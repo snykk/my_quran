@@ -26,11 +26,14 @@ class DetailSurahModel {
         number: json["number"],
         sequence: json["sequence"],
         numberOfVerses: json["numberOfVerses"],
-        name: Name.fromJson(json["name"]),
-        revelation: Revelation.fromJson(json["revelation"]),
-        tafsir: DetailSurahTafsir.fromJson(json["tafsir"]),
-        preBismillah: PreBismillah.fromJson(json["preBismillah"]),
-        verses: List<Verse>.from(json["verses"].map((x) => Verse.fromJson(x))),
+        name: json["name"] == null ? null : Name.fromJson(json["name"]),
+        revelation: json["revelation"] == null ? null : Revelation.fromJson(json["revelation"]),
+        tafsir: json["tafsir"] == null ? null : DetailSurahTafsir.fromJson(json["tafsir"]),
+        preBismillah:
+            json["preBismillah"] == null ? null : PreBismillah.fromJson(json["preBismillah"]),
+        verses: json["verses"] == null
+            ? []
+            : List<Verse>.from(json["verses"].map((x) => Verse.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

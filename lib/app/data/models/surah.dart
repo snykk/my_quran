@@ -22,9 +22,9 @@ class SurahModel {
         number: json["number"],
         sequence: json["sequence"],
         numberOfVerses: json["numberOfVerses"],
-        name: Name.fromJson(json["name"]),
-        revelation: Revelation.fromJson(json["revelation"]),
-        tafsir: Tafsir.fromJson(json["tafsir"]),
+        name: json["name"] == null ? null : Name.fromJson(json["name"]),
+        revelation: json["revelation"] == null ? null : Revelation.fromJson(json["revelation"]),
+        tafsir: json["tafsir"] == null ? null : Tafsir.fromJson(json["tafsir"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,8 +53,9 @@ class Name {
   factory Name.fromJson(Map<String, dynamic> json) => Name(
         short: json["short"],
         long: json["long"],
-        transliteration: Translation.fromJson(json["transliteration"]),
-        translation: Translation.fromJson(json["translation"]),
+        transliteration:
+            json["transliteration"] == null ? null : Translation.fromJson(json["transliteration"]),
+        translation: json["translation"] == null ? null : Translation.fromJson(json["translation"]),
       );
 
   Map<String, dynamic> toJson() => {
