@@ -11,6 +11,12 @@ import '../controllers/home_controller.dart';
 class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    if (Get.isDarkMode) {
+      controller.isDark.value = true;
+    } else {
+      controller.isDark.value = false;
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Al Qur'an Apps"),
@@ -119,9 +125,6 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               TabBar(
-                labelColor: Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurpleDark,
-                unselectedLabelColor: Colors.grey,
-                indicatorColor: MyPalettes.appPurpleDark,
                 tabs: [
                   Tab(
                     text: "Surah",
@@ -160,42 +163,33 @@ class HomeView extends GetView<HomeController> {
                               onTap: () {
                                 Get.toNamed(Routes.DETAIL_SURAH, arguments: surahData);
                               },
-                              leading: Container(
-                                width: 40,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/logo/index_element_${Get.isDarkMode ? 'dark' : 'light'}.png"),
-                                )),
-                                child: Center(
+                              leading: Obx(
+                                () => Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: AssetImage(
+                                        "assets/logo/index_element_${controller.isDark.isTrue ? 'dark' : 'light'}.png"),
+                                  )),
+                                  child: Center(
                                     child: Text(
-                                  "${surahData.number}",
-                                  style: TextStyle(
-                                    color: Get.isDarkMode
-                                        ? MyPalettes.appWhite
-                                        : MyPalettes.appPurpleDark,
+                                      "${surahData.number}",
+                                    ),
                                   ),
-                                )),
+                                ),
                               ),
                               title: Text(
                                 surahData.name?.transliteration?.id ?? 'missing data',
-                                style: TextStyle(
-                                  color: Get.isDarkMode
-                                      ? MyPalettes.appWhite
-                                      : MyPalettes.appPurpleDark,
-                                ),
                               ),
                               subtitle: Text(
                                 "${surahData.numberOfVerses} Ayat | ${surahData.revelation?.id ?? 'missing data'}",
+                                style: TextStyle(
+                                  color: Colors.grey[500],
+                                ),
                               ),
                               trailing: Text(
                                 surahData.name?.short ?? 'missing data',
-                                style: TextStyle(
-                                  color: Get.isDarkMode
-                                      ? MyPalettes.appWhite
-                                      : MyPalettes.appPurpleDark,
-                                ),
                               ),
                             );
                           },
@@ -207,29 +201,24 @@ class HomeView extends GetView<HomeController> {
                       itemBuilder: (context, index) {
                         return ListTile(
                           onTap: () {},
-                          leading: Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                              image: AssetImage(
-                                  "assets/logo/index_element_${Get.isDarkMode ? 'dark' : 'light'}.png"),
-                            )),
-                            child: Center(
+                          leading: Obx(
+                            () => Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image: AssetImage(
+                                    "assets/logo/index_element_${controller.isDark.isTrue ? 'dark' : 'light'}.png"),
+                              )),
+                              child: Center(
                                 child: Text(
-                              "${index + 1}",
-                              style: TextStyle(
-                                color:
-                                    Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurpleDark,
+                                  "${index + 1}",
+                                ),
                               ),
-                            )),
+                            ),
                           ),
                           title: Text(
                             "jus",
-                            style: TextStyle(
-                              color:
-                                  Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurpleDark,
-                            ),
                           ),
                         );
                       },
@@ -243,6 +232,20 @@ class HomeView extends GetView<HomeController> {
                 ),
               )
             ],
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.isDark.toggle();
+          Get.isDarkMode
+              ? Get.changeTheme(MyPalettes.appLightTheme)
+              : Get.changeTheme(MyPalettes.appDarkTheme);
+        },
+        child: Obx(
+          () => Icon(
+            Icons.color_lens,
+            color: controller.isDark.isTrue ? MyPalettes.appPurpleDark : MyPalettes.appWhite,
           ),
         ),
       ),

@@ -24,6 +24,23 @@ class MyPalettes {
         color: appPurpleDark,
       ),
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: appPurpleDark,
+    ),
+    listTileTheme: ListTileThemeData(
+      textColor: appPurpleDark,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: MyPalettes.appPurpleDark,
+      unselectedLabelColor: Colors.grey,
+      indicator: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: appPurpleDark,
+          ),
+        ),
+      ),
+    ),
   );
 
   static ThemeData appDarkTheme = ThemeData(
@@ -40,6 +57,23 @@ class MyPalettes {
       ),
       bodyText2: TextStyle(
         color: appWhite,
+      ),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: appWhite,
+    ),
+    listTileTheme: ListTileThemeData(
+      textColor: appWhite,
+    ),
+    tabBarTheme: TabBarTheme(
+      labelColor: MyPalettes.appWhite,
+      unselectedLabelColor: Colors.grey,
+      indicator: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: appWhite,
+          ),
+        ),
       ),
     ),
   );
