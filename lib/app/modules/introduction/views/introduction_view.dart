@@ -5,6 +5,7 @@ import 'package:lottie/lottie.dart';
 
 import '../../../constants/ratio.dart';
 import '../../../routes/app_pages.dart';
+import '../../../constants/palettes.dart';
 import '../controllers/introduction_controller.dart';
 
 class IntroductionView extends GetView<IntroductionController> {
@@ -40,10 +41,13 @@ class IntroductionView extends GetView<IntroductionController> {
             SizedBox(
               height: 10,
             ),
-            Container(
-              height: Ratio(context).widthApp * 0.7,
-              width: Ratio(context).widthApp * 0.7,
-              child: Lottie.asset("assets/lotties/animation-intro.json"),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Container(
+                height: Ratio(context).widthApp * 0.7,
+                width: Ratio(context).widthApp * 0.7,
+                child: Lottie.asset("assets/lotties/animation-intro.json"),
+              ),
             ),
             SizedBox(
               height: 30,
@@ -52,7 +56,22 @@ class IntroductionView extends GetView<IntroductionController> {
               onPressed: () {
                 Get.offAllNamed(Routes.HOME);
               },
-              child: Text("GET STARTED"),
+              child: Text(
+                "GET STARTED",
+                style: TextStyle(
+                  color: Get.isDarkMode ? MyPalettes.appPurpleDark : MyPalettes.appWhite,
+                ),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurple,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 15,
+                ),
+              ),
             )
           ],
         ),
