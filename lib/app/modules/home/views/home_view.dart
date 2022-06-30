@@ -119,7 +119,7 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               TabBar(
-                labelColor: MyPalettes.appPurpleDark,
+                labelColor: Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurpleDark,
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: MyPalettes.appPurpleDark,
                 tabs: [
@@ -160,26 +160,79 @@ class HomeView extends GetView<HomeController> {
                               onTap: () {
                                 Get.toNamed(Routes.DETAIL_SURAH, arguments: surahData);
                               },
-                              leading: CircleAvatar(
-                                child: Text("${surahData.number}"),
-                                backgroundColor: MyPalettes.appPurple,
+                              leading: Container(
+                                width: 40,
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/logo/index_element_${Get.isDarkMode ? 'dark' : 'light'}.png"),
+                                )),
+                                child: Center(
+                                    child: Text(
+                                  "${surahData.number}",
+                                  style: TextStyle(
+                                    color: Get.isDarkMode
+                                        ? MyPalettes.appWhite
+                                        : MyPalettes.appPurpleDark,
+                                  ),
+                                )),
                               ),
-                              title: Text(surahData.name?.transliteration?.id ?? 'missing data'),
+                              title: Text(
+                                surahData.name?.transliteration?.id ?? 'missing data',
+                                style: TextStyle(
+                                  color: Get.isDarkMode
+                                      ? MyPalettes.appWhite
+                                      : MyPalettes.appPurpleDark,
+                                ),
+                              ),
                               subtitle: Text(
                                 "${surahData.numberOfVerses} Ayat | ${surahData.revelation?.id ?? 'missing data'}",
                               ),
                               trailing: Text(
                                 surahData.name?.short ?? 'missing data',
+                                style: TextStyle(
+                                  color: Get.isDarkMode
+                                      ? MyPalettes.appWhite
+                                      : MyPalettes.appPurpleDark,
+                                ),
                               ),
                             );
                           },
                         );
                       },
                     ),
-                    Center(
-                      child: Text(
-                        "Page 1",
-                      ),
+                    ListView.builder(
+                      itemCount: 30,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          onTap: () {},
+                          leading: Container(
+                            width: 40,
+                            height: 40,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                              image: AssetImage(
+                                  "assets/logo/index_element_${Get.isDarkMode ? 'dark' : 'light'}.png"),
+                            )),
+                            child: Center(
+                                child: Text(
+                              "${index + 1}",
+                              style: TextStyle(
+                                color:
+                                    Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurpleDark,
+                              ),
+                            )),
+                          ),
+                          title: Text(
+                            "jus",
+                            style: TextStyle(
+                              color:
+                                  Get.isDarkMode ? MyPalettes.appWhite : MyPalettes.appPurpleDark,
+                            ),
+                          ),
+                        );
+                      },
                     ),
                     Center(
                       child: Text(

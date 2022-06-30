@@ -9,10 +9,12 @@ class MyPalettes {
   static const appOrange = Color(0xFFE6704A);
 
   static ThemeData appLightTheme = ThemeData(
+    brightness: Brightness.light,
     primaryColor: appPurple,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
       backgroundColor: appPurple,
+      elevation: 4,
     ),
     textTheme: TextTheme(
       bodyText1: TextStyle(
@@ -25,10 +27,12 @@ class MyPalettes {
   );
 
   static ThemeData appDarkTheme = ThemeData(
+    brightness: Brightness.dark,
     primaryColor: appPurpleLight2,
     scaffoldBackgroundColor: appPurpleDark,
     appBarTheme: AppBarTheme(
       backgroundColor: appPurpleDark,
+      elevation: 0,
     ),
     textTheme: TextTheme(
       bodyText1: TextStyle(

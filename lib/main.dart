@@ -9,6 +9,7 @@ void main() {
   runApp(
     GetMaterialApp(
       theme: MyPalettes.appLightTheme,
+      darkTheme: MyPalettes.appLightTheme,
       title: "My Qur'an",
       debugShowCheckedModeBanner: false,
       initialRoute: AppPages.INITIAL,
