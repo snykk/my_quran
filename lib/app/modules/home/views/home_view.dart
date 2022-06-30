@@ -168,10 +168,12 @@ class HomeView extends GetView<HomeController> {
                                   width: 40,
                                   height: 40,
                                   decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/logo/index_element_${controller.isDark.isTrue ? 'dark' : 'light'}.png"),
-                                  )),
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                        "assets/logo/index_element_${controller.isDark.isTrue ? 'dark' : 'light'}.png",
+                                      ),
+                                    ),
+                                  ),
                                   child: Center(
                                     child: Text(
                                       "${surahData.number}",

@@ -8,7 +8,7 @@ import 'app/routes/app_pages.dart';
 void main() {
   runApp(
     GetMaterialApp(
-      theme: MyPalettes.appDarkTheme,
+      theme: MyPalettes.appLightTheme,
       darkTheme: MyPalettes.appLightTheme,
       title: "My Qur'an",
       debugShowCheckedModeBanner: false,
