@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../constants/palettes.dart';
 import '../../../constants/ratio.dart';
-import '../../../data/models/juz_model.dart' as juz;
 import '../../../data/models/surah_model.dart';
 import '../../../routes/app_pages.dart';
 import '../controllers/home_controller.dart';
@@ -155,6 +154,7 @@ class HomeView extends GetView<HomeController> {
                             child: Text("Tidak ada data"),
                           );
                         }
+
                         return ListView.builder(
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
@@ -199,59 +199,77 @@ class HomeView extends GetView<HomeController> {
                         );
                       },
                     ),
-                    FutureBuilder<List<juz.JuzModel>>(
-                      future: controller.getAllJuz(),
-                      builder: ((context, snapJuz) {
-                        if (snapJuz.connectionState == ConnectionState.waiting) {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
+                    ListView.builder(
+                      itemCount: 30,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          onTap: () {
+                            List<SurahModel> rawAllSurahInJuz = [];
+                            List<SurahModel> allSurahInJuz = [];
 
-                        if (!snapJuz.hasData) {
-                          return Center(
-                            child: Text("Tidak ada data"),
-                          );
-                        }
+                            final String surahStart = controller
+                                .juzData['juz ${index + 1}']!['mulai']!
+                                .split(" - ")
+                                .first;
+                            final String surahEnd = controller
+                                .juzData['juz ${index + 1}']!['selesai']!
+                                .split(" - ")
+                                .first;
 
-                        return ListView.builder(
-                          itemCount: snapJuz.data!.length,
-                          itemBuilder: (context, index) {
-                            juz.JuzModel dataPerJuz = snapJuz.data![index];
-                            return ListTile(
-                              onTap: () {},
-                              leading: Obx(
-                                () => Container(
-                                  width: 40,
-                                  height: 40,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                    image: AssetImage(
-                                        "assets/logo/index_element_${controller.isDark.isTrue ? 'dark' : 'light'}.png"),
-                                  )),
-                                  child: Center(
-                                    child: Text(
-                                      "${index + 1}",
-                                    ),
-                                  ),
+                            for (SurahModel item in controller.allSurahData) {
+                              rawAllSurahInJuz.add(item);
+                              if (item.name!.transliteration!.id == surahEnd) {
+                                break;
+                              }
+                            }
+
+                            for (SurahModel item in rawAllSurahInJuz.reversed.toList()) {
+                              allSurahInJuz.add(item);
+                              if (item.name!.transliteration!.id == surahStart) {
+                                break;
+                              }
+                            }
+                            Get.toNamed(Routes.DETAIL_JUZ, arguments: {
+                              "numberJuz": index + 1,
+                              "surahInJuz": allSurahInJuz.reversed.toList(),
+                            });
+                          },
+                          leading: Obx(
+                            () => Container(
+                              width: 40,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image: AssetImage(
+                                    "assets/logo/index_element_${controller.isDark.isTrue ? 'dark' : 'light'}.png"),
+                              )),
+                              child: Center(
+                                child: Text(
+                                  "${index + 1}",
                                 ),
                               ),
-                              title: Text(
-                                "jus ${index + 1}",
+                            ),
+                          ),
+                          title: Text(
+                            "jus ${index + 1}",
+                          ),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                "Mulai dari ${controller.juzData['juz ${index + 1}']!['mulai']}",
+                                style: TextStyle(color: Colors.grey),
                               ),
-                              subtitle: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text("Mulai dari ${dataPerJuz.juzStartInfo}"),
-                                  Text("Sampai pada ${dataPerJuz.juzEndInfo}"),
-                                ],
+                              Text(
+                                "Sampai pada ${controller.juzData['juz ${index + 1}']!['selesai']}",
+                                style: TextStyle(color: Colors.grey),
                               ),
-                              isThreeLine: true,
-                            );
-                          },
+                            ],
+                          ),
+                          isThreeLine: true,
                         );
-                      }),
+                      },
                     ),
                     Center(
                       child: Text(
