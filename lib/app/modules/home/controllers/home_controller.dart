@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../data/models/juz_model.dart';
 import '../../../data/models/surah_model.dart';
 
 class HomeController extends GetxController {
@@ -19,5 +20,26 @@ class HomeController extends GetxController {
     }
 
     return data.map((e) => SurahModel.fromJson(e)).toList();
+  }
+
+  Future<List<JuzModel>> getAllJuz() async {
+    List<JuzModel> listAllJuz = [];
+
+    for (int i = 1; i <= 30; i++) {
+      print("mulai $i");
+      var response = await http.get(Uri.parse("https://api.quran.sutanlab.id/juz/$i"));
+      print("selesai get $i");
+
+      Map<String, dynamic> data = (json.decode(response.body) as Map<String, dynamic>)["data"];
+      print(data);
+
+      JuzModel juzData = JuzModel.fromJson(data);
+      print(juzData);
+
+      listAllJuz.add(juzData);
+    }
+
+    print("eksekusi ygy");
+    return listAllJuz;
   }
 }

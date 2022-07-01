@@ -9,7 +9,7 @@ import '../../../data/models/detail_surah_model.dart' as detail_surah;
 import '../controllers/detail_surah_controller.dart';
 
 class DetailSurahView extends GetView<DetailSurahController> {
-  SurahModel surahData = Get.arguments;
+  final SurahModel surahData = Get.arguments;
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +117,14 @@ class DetailSurahView extends GetView<DetailSurahController> {
             future: controller.getDetailSurah(surahData.number.toString()),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return Container();
+                return Column(
+                  children: [
+                    SizedBox(height: Ratio(context).heightApp * 0.3),
+                    Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  ],
+                );
               }
 
               if (!snapshot.hasData) {
@@ -125,15 +132,12 @@ class DetailSurahView extends GetView<DetailSurahController> {
                   child: Text("Tidak ada data"),
                 );
               }
+
               return ListView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
                 itemCount: snapshot.data?.verses?.length ?? 0,
                 itemBuilder: (context, index) {
-                  // ignore: prefer_is_empty
-                  if (snapshot.data?.verses?.length == 0) {
-                    return Container();
-                  }
                   detail_surah.Verse? ayat = snapshot.data?.verses?[index];
 
                   return Column(

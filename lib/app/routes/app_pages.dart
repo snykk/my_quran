@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import 'package:my_quran/app/modules/detail_juz/bindings/detail_juz_binding.dart';
+import 'package:my_quran/app/modules/detail_juz/views/detail_juz_view.dart';
 import 'package:my_quran/app/modules/detail_surah/bindings/detail_surah_binding.dart';
 import 'package:my_quran/app/modules/detail_surah/views/detail_surah_view.dart';
 import 'package:my_quran/app/modules/home/bindings/home_binding.dart';
@@ -45,6 +47,11 @@ class AppPages {
       name: _Paths.LAST_READ,
       page: () => LastReadView(),
       binding: LastReadBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_JUZ,
+      page: () => DetailJuzView(),
+      binding: DetailJuzBinding(),
     ),
   ];
 }
